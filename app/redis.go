@@ -16,7 +16,7 @@ func Init() {
 	var host string
 	var port int
 	if host, found = revel.Config.String("redis.host"); !found {
-		revel.ERROR.Fatal("No redis.url found.")
+		revel.ERROR.Fatal("No redis.host found.")
 	}
 	if port, found = revel.Config.Int("redis.port"); !found {
 		port = 6379
