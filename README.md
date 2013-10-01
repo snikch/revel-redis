@@ -34,6 +34,9 @@ func (c *MyController) DoStuff() revel.Result{
 }
 ```
 
+### ENV
+If you want to use an environment variable instead of a hardcoded conf value, Revel Redis will prioritise `REDIS_URL` in the format `redis://hostname:port`, over the conf values.
+
 ## Who
 
 Created with love by [Mal Curtis](http://github.com/snikch)
