@@ -11,6 +11,7 @@ module.redis=github.com/snikch/revel-redis
 
 redis.host=127.0.0.1
 redis.port=6379 // Optional
+redis.password=abc123 // Optional
 ```
 
 Now in any controller you want some Redis action, import the library, and add the `RedisController` to your controller struct.
