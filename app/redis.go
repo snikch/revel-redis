@@ -30,23 +30,24 @@ func Init() {
 
 		// Remove the scheme
 		url = strings.Replace(url, "redis://", "", 1)
+		parts := strings.Split(url, "@")
+
+		// Smash off the credentials
+		if len(parts) > 1 {
+			url = parts[1]
+			password = strings.Split(parts[0], ":")[1]
+		}
 
 		// Split to get the port off the end
-		parts := strings.Split(url, ":")
-		if len(parts) != 2 && len(parts) != 4 {
+		parts = strings.Split(url, ":")
+		if len(parts) != 2 {
 			revel.ERROR.Fatal(fmt.Sprintf("REDIS_URL format was incorrect (%s)", url))
 		}
 
 		// Get the host and possible password
 		var port64 int64
-		if len(parts) == 2 {
-			host = parts[0]
-			port64, _ = strconv.ParseInt(parts[1], 0, 0)
-		}else{
-			host = parts[2]
-			password = parts[1]
-			port64, _ = strconv.ParseInt(parts[3], 0, 0)
-		}
+		host = parts[0]
+		port64, _ = strconv.ParseInt(parts[1], 0, 0)
 		if port64 > 0{
 			port = int(port64)
 		}
