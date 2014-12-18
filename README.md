@@ -6,9 +6,10 @@ A simple Redis module for the [Revel Framework](http://revel.github.io/). Adds a
 
 To get started, add the revel-redis module and config to `conf/app.conf`
 
-**NOTICE**: You'd better add this in the body of the `conf/app.conf`, 
+**NOTICE**:
+You'd better add this in the body of the `conf/app.conf`, 
 not append it at the bottom, which leads to empty value. For example you
- may just copy this and paste it under the `http.sslkey` section.
+may just copy this and paste it under the `http.sslkey` section.
 
 ```
 ############# Redis Connection Info ##########
