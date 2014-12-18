@@ -3,7 +3,7 @@ package revelRedis
 
 import (
 	"github.com/gosexy/redis"
-	"github.com/robfig/revel"
+	"github.com/revel/revel"
 	"os"
 	"regexp"
 	"strings"
