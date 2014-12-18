@@ -1,17 +1,24 @@
 
 # Revel Redis
-A simple Redis module for the [Revel Framework](http://robfig.github.io/revel/). Adds a shared [gosexy/redis](https://github.com/gosexy/redis) client to any controller, with a shared connection across all requests.
+A simple Redis module for the [Revel Framework](http://revel.github.io/). Adds a shared [gosexy/redis](https://github.com/gosexy/redis) client to any controller, with a shared connection across all requests.
 
 ## Usage
 
 To get started, add the revel-redis module and config to `conf/app.conf`
 
-```
-module.redis=github.com/snikch/revel-redis
+**NOTICE**: You'd better add this in the body of the `conf/app.conf`, 
+not append it at the bottom, which leads to empty value. For example you
+ may just copy this and paste it under the `http.sslkey` section.
 
-redis.host=127.0.0.1
-redis.port=6379 // Optional
-redis.password=abc123 // Optional
+```
+############# Redis Connection Info ##########
+module.redis=github.com/snikch/revel-redis
+redis.host = 127.0.0.1
+#Optional
+redis.port = 6379
+#Optional
+redis.password =
+##############################################
 ```
 
 Now in any controller you want some Redis action, import the library, and add the `RedisController` to your controller struct.
