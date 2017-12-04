@@ -4,17 +4,19 @@ package revelRedis
 import (
 	"github.com/gosexy/redis"
 	"github.com/revel/revel"
+	"github.com/revel/revel/logger"
 )
 
 var (
-	Redis *redis.Client
+	Redis        *redis.Client
+	moduleLogger logger.MultiLogger
 )
 
 func Init() {
 	// Then look into the configuration for redis.host and redis.port
 	host, found := revel.Config.String("redis.host")
 	if !found {
-		revel.ERROR.Fatal("No redis.host found.")
+		moduleLogger.Fatal("No redis.host found.")
 	}
 
 	port := revel.Config.IntDefault("redis.port", 6379)
@@ -27,14 +29,14 @@ func Init() {
 	var err error
 	err = Redis.Connect(host, uint(port))
 	if err != nil {
-		revel.ERROR.Fatal(err)
+		moduleLogger.Fatal(err.Error())
 	}
 
 	// Attempt to authenticate
 	if len(password) != 0 {
 		m, err := Redis.Auth(password)
 		if err != nil {
-			revel.ERROR.Fatal(fmt.Sprintf("Could not authenticate redis: %s", m))
+			moduleLogger.Fatalf("Could not authenticate redis: %s", m)
 		}
 	}
 }
@@ -52,4 +54,7 @@ func (c *RedisController) Begin() revel.Result {
 func init() {
 	revel.OnAppStart(Init)
 	revel.InterceptMethod((*RedisController).Begin, revel.BEFORE)
+	revel.RegisterModuleInit(func(module *revel.Module) {
+		moduleLogger = module.Log
+	})
 }
