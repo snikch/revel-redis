@@ -1,4 +1,3 @@
-
 # Revel Redis
 A simple Redis module for the [Revel Framework](http://revel.github.io/). Adds a shared [gosexy/redis](https://github.com/gosexy/redis) client to any controller, with a shared connection across all requests.
 
@@ -22,6 +21,8 @@ redis.password =
 ##############################################
 ```
 
+If you want to use an environment variable instead of a hardcoded conf value, see https://revel.github.io/manual/appconf.html#environment-variables
+
 Now in any controller you want some Redis action, import the library, and add the `RedisController` to your controller struct.
 
 ```go
@@ -42,9 +43,6 @@ func (c *MyController) DoStuff() revel.Result{
 }
 ```
 
-### ENV
-If you want to use an environment variable instead of a hardcoded conf value, Revel Redis will prioritise `REDIS_URL` in the format `redis://hostname:port`, over the conf values.
-
 ## Who
 
 Created with love by [Mal Curtis](http://github.com/snikch)
@@ -58,7 +56,6 @@ MIT. See license file.
 ## Todo
 
 *  Handle global processes when starting another instance of hack
-
 
 ## Contributing
 
