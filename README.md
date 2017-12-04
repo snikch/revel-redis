@@ -26,7 +26,7 @@ Now in any controller you want some Redis action, import the library, and add th
 
 ```go
 
-import "github.com/snikch/revel-redis/app"
+import "github.com/snikch/revel-redis"
 
 type MyController struct {
 	*revel.Controller
@@ -38,7 +38,7 @@ Now you can feel free to access Redis on your controller
 
 ```go
 func (c *MyController) DoStuff() revel.Result{
-	return c.RenderText(c.Redis.Keys())
+	return c.RenderText(c.Redis.Keys("*"))
 }
 ```
 
